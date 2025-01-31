@@ -8,8 +8,8 @@
     <ProjectGuid>{9077CC74-27B0-464B-B7B6-BE5E26300D03}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ClashCheckExample</RootNamespace>
-    <AssemblyName>ClashCheckExample</AssemblyName>
+    <RootNamespace>TeklaChecker</RootNamespace>
+    <AssemblyName>TeklaChecker</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>

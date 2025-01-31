@@ -8,7 +8,7 @@ using Tekla.Structures.Model;
 using Tekla.Structures.Model.UI;
 using Tekla.Structures.Geometry3d;
 
-namespace ClashCheckExample {
+namespace TeklaChecker {
     internal class Viewer {
 
         public void ZoomToPart(Part part) {
