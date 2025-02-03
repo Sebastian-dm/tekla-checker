@@ -90,8 +90,14 @@ namespace TeklaChecker
 
         public ClashTableData(int id, ClashCheckData cData) {
             ID = id;
-            Part1Name = (cData.Object1 as Part).Name;
-            Part2Name = (cData.Object2 as Part).Name;
+            Part part1 = cData.Object1 as Part;
+            Part part2 = cData.Object2 as Part;
+            string part1Name = "";
+            string part2Name = "";
+            part1.GetReportProperty("NAME", ref part1Name);
+            part2.GetReportProperty("NAME", ref part2Name);
+            Part1Name = part1Name;
+            Part2Name = part2Name;
             ClashType = ClashTypeStrings[(int)cData.Type];
         }
     }

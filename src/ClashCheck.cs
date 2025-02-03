@@ -45,10 +45,15 @@ namespace TeklaChecker
             _clashTexts = new ArrayList();
             ArrayList objectsToSelect = new ArrayList();
 
-            ModelObjectEnumerator modelObjectEnumerator = _model.GetModelObjectSelector().GetObjectsByFilterName("ClashCheck");
-            // TODO add option to select model view filter
-            foreach (ModelObject modelObject in modelObjectEnumerator) {
-                objectsToSelect.Add(modelObject);
+            var mos = _model.GetModelObjectSelector();
+            var moe = mos.GetObjectsByFilterName("ClashCheck");
+            moe.SelectInstances = true;
+
+            while (moe.MoveNext()) {
+                ModelObject modelObject = moe.Current;
+                if (modelObject != null) {
+                    objectsToSelect.Add(modelObject);
+                }
             }
 
             _selector.Select(objectsToSelect);
@@ -115,7 +120,11 @@ namespace TeklaChecker
             _clashTexts.Clear();
 
             DateTime start = DateTime.Now;
-            _clashCheckHandler.RunClashCheck();
+            _clashCheckHandler.RunClashCheckWithOptions(
+                betweenReferenceModels: false,
+                objectsInsideReferenceModels: false,
+                minDistance: 2.00,
+                betweenParts: true);
 
             TimeSpan span = new TimeSpan();
 
