@@ -29,9 +29,6 @@ namespace TeklaChecker
         private const int MaxWaitSeconds = 30;
 
         // Clash data
-        private int _numberClashes;
-        private ArrayList _clashTexts;
-        public ArrayList ClashTexts { get { return _clashTexts; } }
         private List<ClashCheckData> _clashData;
         public List<ClashCheckData> ClashData { get { return _clashData; } }
         #endregion
@@ -42,12 +39,10 @@ namespace TeklaChecker
             bool result = false;
             _selector = new ModelObjectSelector();
             _clashData = new List<ClashCheckData>();
-            _clashTexts = new ArrayList();
             ArrayList objectsToSelect = new ArrayList();
 
             var mos = _model.GetModelObjectSelector();
             var moe = mos.GetObjectsByFilterName("ClashCheck");
-            moe.SelectInstances = true;
 
             while (moe.MoveNext()) {
                 ModelObject modelObject = moe.Current;
@@ -67,29 +62,14 @@ namespace TeklaChecker
         }
 
         #region events
-        private void TsEventOnClashDetected(ClashCheckData clashCheckData)
-        {
-            lock (_eventLock) {
+        private void TsEventOnClashDetected(ClashCheckData clashCheckData) {
+            lock (_eventLock)
                 _clashData.Add(clashCheckData);
-                _clashTexts.Add("Clash: " + clashCheckData.Object1.Identifier.ID + " <-> " + clashCheckData.Object2.Identifier.ID + ".");
-                //_clashParts.Add(
-                //    clashCheckData.Object1.Identifier.ID.ToString() + "-" + clashCheckData.Object2.Identifier.ID.ToString(),
-                //    new Part[2] { (Part)clashCheckData.Object1, (Part)clashCheckData.Object2 });
-                //_clashTexts.Add(
-                //    ((Part)clashCheckData.Object1).Name +
-                //    " " +
-                //    ((Part)clashCheckData.Object2).Name +
-                //    ": " +
-                //    clashCheckData.Type.ToString());
-            }
         }
 
-        private void TsEventOnClashCheckDone(int numberClashes)
-        {
-            lock (_eventLock)
-            {
+        private void TsEventOnClashCheckDone(int numberClashes) {
+            lock (_eventLock) {
                 System.Threading.Thread.Sleep(WaitInterval);
-                _numberClashes = numberClashes;
                 _clashCheckInProgress = false;
             }
         }
@@ -116,8 +96,7 @@ namespace TeklaChecker
         private bool RunClashCheck()
         {
             _clashCheckInProgress = true;
-            _numberClashes = 0;
-            _clashTexts.Clear();
+            _clashData.Clear();
 
             DateTime start = DateTime.Now;
             _clashCheckHandler.RunClashCheckWithOptions(

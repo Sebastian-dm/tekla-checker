@@ -9,7 +9,7 @@ using Tekla.Structures.Model.UI;
 using Tekla.Structures.Geometry3d;
 
 namespace TeklaChecker {
-    internal class Viewer {
+    internal class ViewHelper {
 
         public void ZoomToPart(Part part) {
             AABB PartBoundingBox = new AABB();
@@ -32,9 +32,12 @@ namespace TeklaChecker {
             
             // Find bounding coordinates
             Solid PartSolid;
-            double Xmin = 0, Xmax = 0;
-            double Ymin = 0, Ymax = 0;
-            double Zmin = 0, Zmax = 0;
+
+
+
+            double Xmin = double.PositiveInfinity, Xmax = double.NegativeInfinity;
+            double Ymin = double.PositiveInfinity, Ymax = double.NegativeInfinity;
+            double Zmin = double.PositiveInfinity, Zmax = double.NegativeInfinity;
             foreach (Part part in parts) {
                 if (part == null) continue;
                 PartSolid = part.GetSolid();

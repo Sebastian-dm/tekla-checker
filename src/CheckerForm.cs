@@ -5,71 +5,62 @@ using System.Windows.Forms;
 using Tekla.Structures.Dialog;
 using Tekla.Structures.Model;
 
-namespace TeklaChecker
-{
-    public partial class CheckerForm : ApplicationFormBase
-    {
+namespace TeklaChecker {
+
+    public partial class CheckerForm : ApplicationFormBase {
+
         private readonly Checker ClashChecker = new Checker();
 
-        public CheckerForm()
-        {
+        public CheckerForm() {
             InitializeComponent();
-            dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.Enabled = false;
         }
 
-        private void ButtonRunCheck_Click(object sender, EventArgs e)
-        {
+        private void ButtonRunCheck_Click(object sender, EventArgs e) {
 
             dataGridView1.DataSource = new List<ClashTableData>();
             dataGridView1.Update();
 
             if (ClashChecker.ClashCheck()) {
                 FillDataGrid(ClashChecker.ClashData);
+                dataGridView1.Enabled = true;
             }
 
-            
         }
 
         private void FillDataGrid(List<ClashCheckData> ClashData) {
 
+            DataGridColumnId.DataPropertyName = "ID";
+            DataGridColumnPart1Name.DataPropertyName = "Part1Name";
+            DataGridColumnPart2Name.DataPropertyName = "Part2Name";
+            DataGridColumnClashType.DataPropertyName = "ClashType";
+
             List<ClashTableData> tableDataObjects = new List<ClashTableData>();
-
-            dataGridView1.AutoGenerateColumns = false;
-            DataGridViewTextBoxColumn IdColumn = new DataGridViewTextBoxColumn();
-            IdColumn.DataPropertyName = "ID";
-            IdColumn.HeaderText = "Clash index";
-
-            DataGridViewTextBoxColumn Part1NameColumn = new DataGridViewTextBoxColumn();
-            Part1NameColumn.DataPropertyName = "Part1Name";
-            Part1NameColumn.HeaderText = "Part 1 name";
-
-            DataGridViewTextBoxColumn Part2NameColumn = new DataGridViewTextBoxColumn();
-            Part2NameColumn.DataPropertyName = "Part2Name";
-            Part2NameColumn.HeaderText = "Part 2 name";
-
-            DataGridViewTextBoxColumn ClashTypeColumn = new DataGridViewTextBoxColumn();
-            ClashTypeColumn.DataPropertyName = "ClashType";
-            ClashTypeColumn.HeaderText = "Clash type";
-
-            dataGridView1.Columns.Add(IdColumn);
-            dataGridView1.Columns.Add(Part1NameColumn);
-            dataGridView1.Columns.Add(Part2NameColumn);
-            dataGridView1.Columns.Add(ClashTypeColumn);
-
             for (int i = 0; i < ClashData.Count; i++) {
                 tableDataObjects.Add(new ClashTableData(i, ClashData[i]));
             }
             dataGridView1.DataSource = tableDataObjects;
         }
 
-        private void CheckerForm_Load(object sender, EventArgs e) {
 
+        private void DataGridCellDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
+
+            var parts = new Part[] {
+                ClashChecker.ClashData[e.RowIndex].Object1 as Part,
+                ClashChecker.ClashData[e.RowIndex].Object2 as Part
+            };
+
+            SelectionHelper selector = new SelectionHelper();
+            selector.SelectParts(parts);
+
+            ViewHelper viewer = new ViewHelper();
+            viewer.ZoomToParts(parts);
         }
     }
 
     public class ClashTableData {
-        
-        
+
+
         public int ID { get; private set; }
         public string Part1Name { get; private set; }
         public string Part2Name { get; private set; }
@@ -101,5 +92,6 @@ namespace TeklaChecker
             ClashType = ClashTypeStrings[(int)cData.Type];
         }
     }
+
 }
 

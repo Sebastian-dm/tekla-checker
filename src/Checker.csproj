@@ -84,7 +84,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelectionHelper.cs" />
-    <Compile Include="Viewer.cs" />
+    <Compile Include="ViewHelper.cs" />
     <EmbeddedResource Include="CheckerForm.resx">
       <DependentUpon>CheckerForm.cs</DependentUpon>
     </EmbeddedResource>

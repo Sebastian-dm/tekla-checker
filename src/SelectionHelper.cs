@@ -1,14 +1,23 @@
 ﻿using System;
+using System.Collections;
 using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using Tekla.Structures.Model;
-using Tekla.Structures.Model.UI;
+
+using ModelObjectSelector = Tekla.Structures.Model.UI.ModelObjectSelector;
 
 namespace TeklaChecker {
     internal class SelectionHelper {
 
-        public SelectionHelper() { }
+        private Model _model;
+        private ModelObjectSelector _selector;
+
+
+        public SelectionHelper() {
+            _model = new Model();
+            _selector = new ModelObjectSelector();
+        }
 
         public List<Part> GetSelectedParts() {
 
@@ -40,6 +49,17 @@ namespace TeklaChecker {
                 allParts[i] = (Part)moe.Current;
 
             return allParts.ToList();
+        }
+
+        public void SelectParts(Part[] parts) {
+            ArrayList modelObjects = new ArrayList();
+            foreach (Part part in parts) {
+                modelObjects.Add(part);
+            }
+
+            _selector.Select(modelObjects);
+            _model.CommitChanges();
+
         }
     }
 }
