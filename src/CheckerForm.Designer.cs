@@ -31,11 +31,15 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckerForm));
             this.ButtonRunCheck = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.numericUpDownOverlap = new System.Windows.Forms.NumericUpDown();
             this.DataGridColumnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DataGridColumnPart1Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DataGridColumnPart2Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DataGridColumnClashType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DataGridColumnOverlap = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownOverlap)).BeginInit();
             this.SuspendLayout();
             // 
             // ButtonRunCheck
@@ -64,16 +68,50 @@
             this.DataGridColumnId,
             this.DataGridColumnPart1Name,
             this.DataGridColumnPart2Name,
-            this.DataGridColumnClashType});
+            this.DataGridColumnClashType,
+            this.DataGridColumnOverlap});
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridView1.Location = new System.Drawing.Point(12, 12);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(354, 381);
+            this.dataGridView1.Size = new System.Drawing.Size(436, 381);
             this.dataGridView1.TabIndex = 2;
             this.dataGridView1.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridCellDoubleClick);
+            // 
+            // label1
+            // 
+            this.structuresExtender.SetAttributeName(this.label1, null);
+            this.structuresExtender.SetAttributeTypeName(this.label1, null);
+            this.label1.AutoSize = true;
+            this.structuresExtender.SetBindPropertyName(this.label1, null);
+            this.label1.Location = new System.Drawing.Point(250, 404);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(68, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Min. overlap:";
+            // 
+            // numericUpDownOverlap
+            // 
+            this.structuresExtender.SetAttributeName(this.numericUpDownOverlap, null);
+            this.structuresExtender.SetAttributeTypeName(this.numericUpDownOverlap, null);
+            this.structuresExtender.SetBindPropertyName(this.numericUpDownOverlap, null);
+            this.numericUpDownOverlap.DecimalPlaces = 2;
+            this.numericUpDownOverlap.Location = new System.Drawing.Point(324, 402);
+            this.numericUpDownOverlap.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDownOverlap.Name = "numericUpDownOverlap";
+            this.numericUpDownOverlap.Size = new System.Drawing.Size(41, 20);
+            this.numericUpDownOverlap.TabIndex = 5;
+            this.numericUpDownOverlap.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
             // 
             // DataGridColumnId
             // 
@@ -101,6 +139,12 @@
             this.DataGridColumnClashType.Name = "DataGridColumnClashType";
             this.DataGridColumnClashType.ReadOnly = true;
             // 
+            // DataGridColumnOverlap
+            // 
+            this.DataGridColumnOverlap.HeaderText = "Overlap";
+            this.DataGridColumnOverlap.Name = "DataGridColumnOverlap";
+            this.DataGridColumnOverlap.ReadOnly = true;
+            // 
             // CheckerForm
             // 
             this.structuresExtender.SetAttributeName(this, null);
@@ -108,24 +152,31 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.structuresExtender.SetBindPropertyName(this, null);
-            this.ClientSize = new System.Drawing.Size(377, 434);
+            this.ClientSize = new System.Drawing.Size(460, 434);
+            this.Controls.Add(this.numericUpDownOverlap);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.ButtonRunCheck);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CheckerForm";
             this.Text = "Tekla Clash Checker";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownOverlap)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
         private System.Windows.Forms.Button ButtonRunCheck;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown numericUpDownOverlap;
         private System.Windows.Forms.DataGridViewTextBoxColumn DataGridColumnId;
         private System.Windows.Forms.DataGridViewTextBoxColumn DataGridColumnPart1Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn DataGridColumnPart2Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn DataGridColumnClashType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DataGridColumnOverlap;
     }
 }
 

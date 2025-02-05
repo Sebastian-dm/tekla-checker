@@ -74,7 +74,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClashCheck.cs" />
+    <Compile Include="ClashChecker.cs" />
     <Compile Include="CheckerForm.cs">
       <SubType>Form</SubType>
     </Compile>

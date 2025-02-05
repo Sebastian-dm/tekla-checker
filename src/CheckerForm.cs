@@ -9,7 +9,8 @@ namespace TeklaChecker {
 
     public partial class CheckerForm : ApplicationFormBase {
 
-        private readonly Checker ClashChecker = new Checker();
+        private readonly ClashChecker ClashChecker = new ClashChecker();
+        public double settingOverlap;
 
         public CheckerForm() {
             InitializeComponent();
@@ -21,7 +22,7 @@ namespace TeklaChecker {
             dataGridView1.DataSource = new List<ClashTableData>();
             dataGridView1.Update();
 
-            if (ClashChecker.ClashCheck()) {
+            if (ClashChecker.ClashCheck((double) numericUpDownOverlap.Value)) {
                 FillDataGrid(ClashChecker.ClashData);
                 dataGridView1.Enabled = true;
             }
@@ -34,6 +35,7 @@ namespace TeklaChecker {
             DataGridColumnPart1Name.DataPropertyName = "Part1Name";
             DataGridColumnPart2Name.DataPropertyName = "Part2Name";
             DataGridColumnClashType.DataPropertyName = "ClashType";
+            DataGridColumnOverlap.DataPropertyName = "Overlap";
 
             List<ClashTableData> tableDataObjects = new List<ClashTableData>();
             for (int i = 0; i < ClashData.Count; i++) {
@@ -44,17 +46,18 @@ namespace TeklaChecker {
 
 
         private void DataGridCellDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
-
-            var parts = new Part[] {
-                ClashChecker.ClashData[e.RowIndex].Object1 as Part,
-                ClashChecker.ClashData[e.RowIndex].Object2 as Part
-            };
+            ModelObject mo1 = ClashChecker.ClashData[e.RowIndex].Object1;
+            ModelObject mo2 = ClashChecker.ClashData[e.RowIndex].Object2;
+            var parts = new Part[] {mo1 as Part, mo2 as Part};
 
             SelectionHelper selector = new SelectionHelper();
             selector.SelectParts(parts);
 
             ViewHelper viewer = new ViewHelper();
             viewer.ZoomToParts(parts);
+
+            viewer.RemoveHighlights();
+            viewer.HighlightObjects(mo1.Identifier.ID, mo2.Identifier.ID);
         }
     }
 
@@ -65,6 +68,7 @@ namespace TeklaChecker {
         public string Part1Name { get; private set; }
         public string Part2Name { get; private set; }
         public string ClashType { get; private set; }
+        public double Overlap { get; private set; }
 
 
         readonly String[] ClashTypeStrings = new String[] {
@@ -90,6 +94,7 @@ namespace TeklaChecker {
             Part1Name = part1Name;
             Part2Name = part2Name;
             ClashType = ClashTypeStrings[(int)cData.Type];
+            Overlap = cData.Overlap*1000;
         }
     }
 

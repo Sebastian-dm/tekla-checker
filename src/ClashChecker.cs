@@ -10,7 +10,7 @@ namespace TeklaChecker
     /// <summary>
     /// This example shows how to run Clash Check and use related events from Tekla OpenAPI.
     /// </summary>
-    public class Checker
+    public class ClashChecker
     {
         #region fields & properties
         private readonly Model _model = new Model();
@@ -31,11 +31,18 @@ namespace TeklaChecker
         // Clash data
         private List<ClashCheckData> _clashData;
         public List<ClashCheckData> ClashData { get { return _clashData; } }
+
+
+        private double SettingMinOverlap = 0.00;
         #endregion
 
 
-        public bool ClashCheck()
+        public bool ClashCheck(double minOverlap)
         {
+
+            SettingMinOverlap = minOverlap;
+
+
             bool result = false;
             _selector = new ModelObjectSelector();
             _clashData = new List<ClashCheckData>();
@@ -64,7 +71,8 @@ namespace TeklaChecker
         #region events
         private void TsEventOnClashDetected(ClashCheckData clashCheckData) {
             lock (_eventLock)
-                _clashData.Add(clashCheckData);
+                if (clashCheckData.Overlap >= 0)//SettingMinOverlap)
+                    _clashData.Add(clashCheckData);
         }
 
         private void TsEventOnClashCheckDone(int numberClashes) {
@@ -101,8 +109,9 @@ namespace TeklaChecker
             DateTime start = DateTime.Now;
             _clashCheckHandler.RunClashCheckWithOptions(
                 betweenReferenceModels: false,
+                betweenReferenceModelsAndComponents: false,
                 objectsInsideReferenceModels: false,
-                minDistance: 2.00,
+                minDistance: SettingMinOverlap,
                 betweenParts: true);
 
             TimeSpan span = new TimeSpan();
