@@ -59,6 +59,10 @@ namespace TeklaChecker {
             viewer.RemoveHighlights();
             viewer.HighlightObjects(mo1.Identifier.ID, mo2.Identifier.ID);
         }
+
+        private void CheckerForm_Load(object sender, EventArgs e) {
+
+        }
     }
 
     public class ClashTableData {

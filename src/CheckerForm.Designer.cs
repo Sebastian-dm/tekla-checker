@@ -31,13 +31,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckerForm));
             this.ButtonRunCheck = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.numericUpDownOverlap = new System.Windows.Forms.NumericUpDown();
             this.DataGridColumnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DataGridColumnPart1Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DataGridColumnPart2Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DataGridColumnClashType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DataGridColumnOverlap = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
+            this.numericUpDownOverlap = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownOverlap)).BeginInit();
             this.SuspendLayout();
@@ -80,6 +80,38 @@
             this.dataGridView1.TabIndex = 2;
             this.dataGridView1.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridCellDoubleClick);
             // 
+            // DataGridColumnId
+            // 
+            this.DataGridColumnId.FillWeight = 50F;
+            this.DataGridColumnId.HeaderText = "#";
+            this.DataGridColumnId.Name = "DataGridColumnId";
+            this.DataGridColumnId.ReadOnly = true;
+            this.DataGridColumnId.Width = 50;
+            // 
+            // DataGridColumnPart1Name
+            // 
+            this.DataGridColumnPart1Name.HeaderText = "Part 1 Name";
+            this.DataGridColumnPart1Name.Name = "DataGridColumnPart1Name";
+            this.DataGridColumnPart1Name.ReadOnly = true;
+            // 
+            // DataGridColumnPart2Name
+            // 
+            this.DataGridColumnPart2Name.HeaderText = "Part 2 Name";
+            this.DataGridColumnPart2Name.Name = "DataGridColumnPart2Name";
+            this.DataGridColumnPart2Name.ReadOnly = true;
+            // 
+            // DataGridColumnClashType
+            // 
+            this.DataGridColumnClashType.HeaderText = "Clash type";
+            this.DataGridColumnClashType.Name = "DataGridColumnClashType";
+            this.DataGridColumnClashType.ReadOnly = true;
+            // 
+            // DataGridColumnOverlap
+            // 
+            this.DataGridColumnOverlap.HeaderText = "Overlap";
+            this.DataGridColumnOverlap.Name = "DataGridColumnOverlap";
+            this.DataGridColumnOverlap.ReadOnly = true;
+            // 
             // label1
             // 
             this.structuresExtender.SetAttributeName(this.label1, null);
@@ -113,38 +145,6 @@
             0,
             0});
             // 
-            // DataGridColumnId
-            // 
-            this.DataGridColumnId.FillWeight = 50F;
-            this.DataGridColumnId.HeaderText = "#";
-            this.DataGridColumnId.Name = "DataGridColumnId";
-            this.DataGridColumnId.ReadOnly = true;
-            this.DataGridColumnId.Width = 50;
-            // 
-            // DataGridColumnPart1Name
-            // 
-            this.DataGridColumnPart1Name.HeaderText = "Part 1 Name";
-            this.DataGridColumnPart1Name.Name = "DataGridColumnPart1Name";
-            this.DataGridColumnPart1Name.ReadOnly = true;
-            // 
-            // DataGridColumnPart2Name
-            // 
-            this.DataGridColumnPart2Name.HeaderText = "Part 2 Name";
-            this.DataGridColumnPart2Name.Name = "DataGridColumnPart2Name";
-            this.DataGridColumnPart2Name.ReadOnly = true;
-            // 
-            // DataGridColumnClashType
-            // 
-            this.DataGridColumnClashType.HeaderText = "Clash type";
-            this.DataGridColumnClashType.Name = "DataGridColumnClashType";
-            this.DataGridColumnClashType.ReadOnly = true;
-            // 
-            // DataGridColumnOverlap
-            // 
-            this.DataGridColumnOverlap.HeaderText = "Overlap";
-            this.DataGridColumnOverlap.Name = "DataGridColumnOverlap";
-            this.DataGridColumnOverlap.ReadOnly = true;
-            // 
             // CheckerForm
             // 
             this.structuresExtender.SetAttributeName(this, null);
@@ -159,7 +159,9 @@
             this.Controls.Add(this.ButtonRunCheck);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CheckerForm";
+            this.ShowInTaskbar = true;
             this.Text = "Tekla Clash Checker";
+            this.Load += new System.EventHandler(this.CheckerForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownOverlap)).EndInit();
             this.ResumeLayout(false);

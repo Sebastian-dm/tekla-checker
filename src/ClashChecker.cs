@@ -40,7 +40,7 @@ namespace TeklaChecker
         public bool ClashCheck(double minOverlap)
         {
 
-            SettingMinOverlap = minOverlap;
+            SettingMinOverlap = -1*minOverlap;
 
 
             bool result = false;
@@ -71,7 +71,7 @@ namespace TeklaChecker
         #region events
         private void TsEventOnClashDetected(ClashCheckData clashCheckData) {
             lock (_eventLock)
-                if (clashCheckData.Overlap >= 0)//SettingMinOverlap)
+                if (clashCheckData.Overlap >= SettingMinOverlap)
                     _clashData.Add(clashCheckData);
         }
 

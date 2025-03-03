@@ -9,6 +9,9 @@ using Tekla.Structures;
 using Tekla.Structures.Model;
 using Tekla.Structures.Geometry3d;
 using TSMUI = Tekla.Structures.Model.UI;
+using Tekla.Structures.Solid;
+using Tekla.Structures.Model.UI;
+using Tekla.Structures.ModelInternal;
 
 
 
@@ -80,7 +83,7 @@ namespace TeklaChecker {
             Identifier identifier2 = new Identifier(ID2);
 
             try {
-                boundingBoxes = _ClashCheckHandler.GetIntersectionBoundingBoxes(identifier1, identifier2);
+                boundingBoxes = GetIntersectionMinimumIntersectionBoundingBoxes(identifier1, identifier2);
             }
             catch (ArgumentException) {
                 // Not all object types are visualizable. Just draw nothing.
@@ -127,6 +130,49 @@ namespace TeklaChecker {
             };
 
             return new PolyLine(points);
+        }
+
+        private ArrayList GetIntersectionMinimumIntersectionBoundingBoxes(Identifier identifier1, Identifier identifier2) {
+            var orientedBoundingBoxes = new ArrayList();
+
+            Part Part1 = new Model().GetCorrectInstance(identifier1) as Part;
+            Part Part2 = new Model().GetCorrectInstance(identifier2) as Part;
+            Solid Solid1 = Part1.GetSolid();
+            Solid Solid2 = Part2.GetSolid();
+
+            //var MyModel = new Model();
+            //MyModel.GetWorkPlaneHandler().SetCurrentTransformationPlane(new TransformationPlane());
+            //MyModel.GetWorkPlaneHandler().SetCurrentTransformationPlane(new TransformationPlane(Part1.GetCoordinateSystem()));
+            //Part1.Select();
+
+            ArrayList ClashBoxes;
+            try {
+                ClashBoxes = _ClashCheckHandler.GetIntersectionBoundingBoxes(identifier1, identifier2);
+                
+            }
+            catch (ArgumentException) {
+                // Not all object types are visualizable. Just draw nothing.
+                return new ArrayList();
+            }
+
+
+            Part a = new Model().GetCorrectInstance(identifier1) as Part;
+            a.Select();
+
+            
+
+            foreach (AABB ClashBox in ClashBoxes) {
+                AABB ClashBoxNew = new AABB();
+                ClashBoxNew.MinPoint.X = Math.Max(Math.Max(ClashBox.MinPoint.X, Solid1.MinimumPoint.X), Solid2.MinimumPoint.X);
+                ClashBoxNew.MinPoint.Y = Math.Max(Math.Max(ClashBox.MinPoint.Y, Solid1.MinimumPoint.Y), Solid2.MinimumPoint.Y);
+                ClashBoxNew.MinPoint.Z = Math.Max(Math.Max(ClashBox.MinPoint.Z, Solid1.MinimumPoint.Z), Solid2.MinimumPoint.Z);
+                ClashBoxNew.MaxPoint.X = Math.Min(Math.Min(ClashBox.MaxPoint.X, Solid1.MaximumPoint.X), Solid2.MaximumPoint.X);
+                ClashBoxNew.MaxPoint.Y = Math.Min(Math.Min(ClashBox.MaxPoint.Y, Solid1.MaximumPoint.Y), Solid2.MaximumPoint.Y);
+                ClashBoxNew.MaxPoint.Z = Math.Min(Math.Min(ClashBox.MaxPoint.Z, Solid1.MaximumPoint.Z), Solid2.MaximumPoint.Z);
+                orientedBoundingBoxes.Add(ClashBoxNew);
+            }
+
+            return orientedBoundingBoxes;
         }
     }
 }
