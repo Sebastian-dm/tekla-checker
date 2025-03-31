@@ -49,7 +49,6 @@ namespace TeklaChecker {
             Solid PartSolid;
 
 
-
             double Xmin = double.PositiveInfinity, Xmax = double.NegativeInfinity;
             double Ymin = double.PositiveInfinity, Ymax = double.NegativeInfinity;
             double Zmin = double.PositiveInfinity, Zmax = double.NegativeInfinity;
@@ -77,13 +76,18 @@ namespace TeklaChecker {
             }
         }
 
-        public void HighlightObjects(int ID1, int ID2) {
+        public void DrawCrashBoundingBox(int ID1, int ID2) {
+            var model = new Model();
             ArrayList boundingBoxes;
             Identifier identifier1 = new Identifier(ID1);
             Identifier identifier2 = new Identifier(ID2);
+            Part Part1 = model.GetCorrectInstance(identifier1) as Part;
+            Part Part2 = model.GetCorrectInstance(identifier2) as Part;
+
+            model.GetWorkPlaneHandler().SetCurrentTransformationPlane(new TransformationPlane(Part1.GetCoordinateSystem()));
 
             try {
-                boundingBoxes = GetIntersectionMinimumIntersectionBoundingBoxes(identifier1, identifier2);
+                boundingBoxes = GetIntersectionMinimumIntersectionBoundingBoxes(Part1, Part2);
             }
             catch (ArgumentException) {
                 // Not all object types are visualizable. Just draw nothing.
@@ -91,7 +95,6 @@ namespace TeklaChecker {
             }
 
             var graphicsDrawer = new TSMUI.GraphicsDrawer();
-
             foreach (AABB boundingBox in boundingBoxes) {
                 var graphicPolyLine = new TSMUI.GraphicPolyLine(
                     color: new TSMUI.Color(1.0, 0.0, 1.0),
@@ -102,9 +105,11 @@ namespace TeklaChecker {
                 int id = graphicsDrawer.DrawPolyLine(graphicPolyLine);
                 _temporaryGraphicIds.Add(id);
             }
+            
+            model.GetWorkPlaneHandler().SetCurrentTransformationPlane(new TransformationPlane());
         }
 
-        public void RemoveHighlights() {
+        public void RemoveDrawnCrashBoundingBox() {
             var graphicsDrawer = new TSMUI.GraphicsDrawer();
             graphicsDrawer.RemoveTemporaryGraphicsObjects(_temporaryGraphicIds);
             _temporaryGraphicIds.Clear();
@@ -132,35 +137,20 @@ namespace TeklaChecker {
             return new PolyLine(points);
         }
 
-        private ArrayList GetIntersectionMinimumIntersectionBoundingBoxes(Identifier identifier1, Identifier identifier2) {
-            var orientedBoundingBoxes = new ArrayList();
+        private ArrayList GetIntersectionMinimumIntersectionBoundingBoxes(Part Part1, Part Part2) {
 
-            Part Part1 = new Model().GetCorrectInstance(identifier1) as Part;
-            Part Part2 = new Model().GetCorrectInstance(identifier2) as Part;
-            Solid Solid1 = Part1.GetSolid();
-            Solid Solid2 = Part2.GetSolid();
-
-            //var MyModel = new Model();
-            //MyModel.GetWorkPlaneHandler().SetCurrentTransformationPlane(new TransformationPlane());
-            //MyModel.GetWorkPlaneHandler().SetCurrentTransformationPlane(new TransformationPlane(Part1.GetCoordinateSystem()));
-            //Part1.Select();
+            var Solid1 = Part1.GetSolid();
+            var Solid2 = Part2.GetSolid();
 
             ArrayList ClashBoxes;
             try {
-                ClashBoxes = _ClashCheckHandler.GetIntersectionBoundingBoxes(identifier1, identifier2);
-                
+                ClashBoxes = _ClashCheckHandler.GetIntersectionBoundingBoxes(Part1.Identifier, Part2.Identifier);
             }
             catch (ArgumentException) {
-                // Not all object types are visualizable. Just draw nothing.
                 return new ArrayList();
             }
 
-
-            Part a = new Model().GetCorrectInstance(identifier1) as Part;
-            a.Select();
-
-            
-
+            var orientedBoundingBoxes = new ArrayList();
             foreach (AABB ClashBox in ClashBoxes) {
                 AABB ClashBoxNew = new AABB();
                 ClashBoxNew.MinPoint.X = Math.Max(Math.Max(ClashBox.MinPoint.X, Solid1.MinimumPoint.X), Solid2.MinimumPoint.X);
@@ -173,6 +163,6 @@ namespace TeklaChecker {
             }
 
             return orientedBoundingBoxes;
-        }
+            }
     }
 }

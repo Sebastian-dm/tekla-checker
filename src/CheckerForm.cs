@@ -12,6 +12,7 @@ namespace TeklaChecker {
         private readonly ClashChecker ClashChecker = new ClashChecker();
         public double settingOverlap;
 
+
         public CheckerForm() {
             InitializeComponent();
             dataGridView1.Enabled = false;
@@ -56,8 +57,8 @@ namespace TeklaChecker {
             ViewHelper viewer = new ViewHelper();
             viewer.ZoomToParts(parts);
 
-            viewer.RemoveHighlights();
-            viewer.HighlightObjects(mo1.Identifier.ID, mo2.Identifier.ID);
+            viewer.RemoveDrawnCrashBoundingBox();
+            viewer.DrawCrashBoundingBox(mo1.Identifier.ID, mo2.Identifier.ID);
         }
 
         private void CheckerForm_Load(object sender, EventArgs e) {

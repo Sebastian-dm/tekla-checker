@@ -44,6 +44,7 @@
             // 
             // ButtonRunCheck
             // 
+            this.ButtonRunCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.structuresExtender.SetAttributeName(this.ButtonRunCheck, null);
             this.structuresExtender.SetAttributeTypeName(this.ButtonRunCheck, null);
             this.structuresExtender.SetBindPropertyName(this.ButtonRunCheck, null);
@@ -60,6 +61,9 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeRows = false;
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.structuresExtender.SetAttributeName(this.dataGridView1, null);
             this.structuresExtender.SetAttributeTypeName(this.dataGridView1, null);
             this.structuresExtender.SetBindPropertyName(this.dataGridView1, null);
@@ -114,6 +118,7 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.structuresExtender.SetAttributeName(this.label1, null);
             this.structuresExtender.SetAttributeTypeName(this.label1, null);
             this.label1.AutoSize = true;
@@ -126,6 +131,7 @@
             // 
             // numericUpDownOverlap
             // 
+            this.numericUpDownOverlap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.structuresExtender.SetAttributeName(this.numericUpDownOverlap, null);
             this.structuresExtender.SetAttributeTypeName(this.numericUpDownOverlap, null);
             this.structuresExtender.SetBindPropertyName(this.numericUpDownOverlap, null);

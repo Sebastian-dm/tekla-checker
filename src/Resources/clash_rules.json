@@ -1,0 +1,9 @@
+{
+    "DUMMY*": {"*": {"type": "ignore"}},
+    "DY": {"*": {"type": "ignore"}},
+    "LAYOUT*": {"*": {"type": "ignore"}},
+	"LP": {"*": {"type": "ignore"}},
+	"E*": {"*": {"type": "ignore"}},
+	"I*": {"*": {"type": "ignore"}},
+    "*": {"*": {"type": "clash"}}
+}
