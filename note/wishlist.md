@@ -1,7 +1,7 @@
 # Tekla model checker feature wishlist
 
 ## Clash check
-Filter specific clashes from the model
+Filter clashes based on overlap
 
 ## Part checks
 Properties valid
@@ -14,7 +14,6 @@ Two parts have same cast unit and class but different material grade
 
 
 ## Rebar checks
-
 Rebar minimum length
 No assembly - Rebar doesn't belong to an assembly
 Invalid geometry - Rebar cannot be generated usually due to bending radius
