@@ -76,19 +76,43 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClashChecker.cs" />
-    <Compile Include="CheckerForm.cs">
+    <Compile Include="Helpers\SelectionHelper.cs" />
+    <Compile Include="Helpers\ViewHelper.cs" />
+    <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CheckerForm.Designer.cs">
-      <DependentUpon>CheckerForm.cs</DependentUpon>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SelectionHelper.cs" />
-    <Compile Include="ViewHelper.cs" />
-    <EmbeddedResource Include="CheckerForm.resx">
-      <DependentUpon>CheckerForm.cs</DependentUpon>
+    <Compile Include="Services\ClashChecker.cs" />
+    <Compile Include="Tabs\ClashTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tabs\ClashTab.Designer.cs">
+      <DependentUpon>ClashTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tabs\PartsTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tabs\PartsTab.Designer.cs">
+      <DependentUpon>PartsTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tabs\RebarTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tabs\RebarTab.Designer.cs">
+      <DependentUpon>RebarTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tabs\SettingsTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tabs\SettingsTab.Designer.cs">
+      <DependentUpon>SettingsTab.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -101,6 +125,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
+    <None Include="Config\default.ccr" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

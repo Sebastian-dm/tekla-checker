@@ -7,7 +7,7 @@ using Tekla.Structures.Model;
 
 using ModelObjectSelector = Tekla.Structures.Model.UI.ModelObjectSelector;
 
-namespace TeklaChecker {
+namespace TeklaChecker.Helpers {
     internal class SelectionHelper {
 
         private Model _model;
@@ -23,7 +23,7 @@ namespace TeklaChecker {
 
             List<Part> selectedParts = new List<Part>();
 
-            ModelObjectEnumerator moe = new Tekla.Structures.Model.UI.ModelObjectSelector().GetSelectedObjects();
+            ModelObjectEnumerator moe = new ModelObjectSelector().GetSelectedObjects();
             moe.SelectInstances = true;
 
             while (moe.MoveNext()) {

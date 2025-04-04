@@ -1,34 +1,29 @@
-﻿namespace TeklaChecker
-{
-    partial class CheckerForm
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
+﻿namespace TeklaChecker.Tabs {
+    partial class ClashTab {
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
+        private System.Windows.Forms.Button ButtonRunCheck;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown numericUpDownOverlap;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DataGridColumnId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DataGridColumnPart1Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DataGridColumnPart2Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DataGridColumnClashType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DataGridColumnOverlap;
+
+        /// <summary> 
         /// Clean up any resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
+        protected override void Dispose(bool disposing) {
             if (disposing && (components != null))
-            {
                 components.Dispose();
-            }
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+        #region Component Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckerForm));
+        private void InitializeComponent() {
             this.ButtonRunCheck = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.DataGridColumnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,9 +40,6 @@
             // ButtonRunCheck
             // 
             this.ButtonRunCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.structuresExtender.SetAttributeName(this.ButtonRunCheck, null);
-            this.structuresExtender.SetAttributeTypeName(this.ButtonRunCheck, null);
-            this.structuresExtender.SetBindPropertyName(this.ButtonRunCheck, null);
             this.ButtonRunCheck.Location = new System.Drawing.Point(12, 399);
             this.ButtonRunCheck.Name = "ButtonRunCheck";
             this.ButtonRunCheck.Size = new System.Drawing.Size(75, 23);
@@ -61,12 +53,9 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.structuresExtender.SetAttributeName(this.dataGridView1, null);
-            this.structuresExtender.SetAttributeTypeName(this.dataGridView1, null);
-            this.structuresExtender.SetBindPropertyName(this.dataGridView1, null);
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.DataGridColumnId,
@@ -106,7 +95,7 @@
             // 
             // DataGridColumnClashType
             // 
-            this.DataGridColumnClashType.HeaderText = "Clash type";
+            this.DataGridColumnClashType.HeaderText = "Clash Type";
             this.DataGridColumnClashType.Name = "DataGridColumnClashType";
             this.DataGridColumnClashType.ReadOnly = true;
             // 
@@ -119,10 +108,7 @@
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.structuresExtender.SetAttributeName(this.label1, null);
-            this.structuresExtender.SetAttributeTypeName(this.label1, null);
             this.label1.AutoSize = true;
-            this.structuresExtender.SetBindPropertyName(this.label1, null);
             this.label1.Location = new System.Drawing.Point(250, 404);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(68, 13);
@@ -132,9 +118,6 @@
             // numericUpDownOverlap
             // 
             this.numericUpDownOverlap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.structuresExtender.SetAttributeName(this.numericUpDownOverlap, null);
-            this.structuresExtender.SetAttributeTypeName(this.numericUpDownOverlap, null);
-            this.structuresExtender.SetBindPropertyName(this.numericUpDownOverlap, null);
             this.numericUpDownOverlap.DecimalPlaces = 2;
             this.numericUpDownOverlap.Location = new System.Drawing.Point(324, 402);
             this.numericUpDownOverlap.Maximum = new decimal(new int[] {
@@ -151,40 +134,22 @@
             0,
             0});
             // 
-            // CheckerForm
+            // ClashTab
             // 
-            this.structuresExtender.SetAttributeName(this, null);
-            this.structuresExtender.SetAttributeTypeName(this, null);
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.structuresExtender.SetBindPropertyName(this, null);
-            this.ClientSize = new System.Drawing.Size(460, 434);
             this.Controls.Add(this.numericUpDownOverlap);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.ButtonRunCheck);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "CheckerForm";
-            this.ShowInTaskbar = true;
-            this.Text = "Tekla Clash Checker";
-            this.Load += new System.EventHandler(this.CheckerForm_Load);
+            this.Name = "ClashTab";
+            this.Size = new System.Drawing.Size(460, 434);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownOverlap)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
-        private System.Windows.Forms.Button ButtonRunCheck;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.NumericUpDown numericUpDownOverlap;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DataGridColumnId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DataGridColumnPart1Name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DataGridColumnPart2Name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DataGridColumnClashType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DataGridColumnOverlap;
     }
 }
-

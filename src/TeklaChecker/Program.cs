@@ -15,7 +15,7 @@ namespace TeklaChecker
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CheckerForm());
+            Application.Run(new MainForm());
         }
     }
 }

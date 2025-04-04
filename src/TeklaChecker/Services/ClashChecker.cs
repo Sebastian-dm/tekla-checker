@@ -13,13 +13,11 @@ using Tekla.Structures;
 using Tekla.Structures.ModelInternal;
 using System.Linq;
 
-namespace TeklaChecker
-{
+namespace TeklaChecker.Services {
     /// <summary>
     /// This example shows how to run Clash Check and use related events from Tekla OpenAPI.
     /// </summary>
-    public class ClashChecker
-    {
+    public class ClashChecker {
         #region fields & properties
         private readonly Model _model = new Model();
         private ModelObjectSelector _selector;

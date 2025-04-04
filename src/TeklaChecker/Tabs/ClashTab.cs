@@ -1,19 +1,23 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using Tekla.Structures.Dialog;
 using Tekla.Structures.Model;
+using TeklaChecker.Helpers;
+using TeklaChecker.Services;
 
-namespace TeklaChecker {
-
-    public partial class CheckerForm : ApplicationFormBase {
+namespace TeklaChecker.Tabs {
+    public partial class ClashTab : UserControl {
 
         private readonly ClashChecker ClashChecker = new ClashChecker();
         public double settingOverlap;
 
-
-        public CheckerForm() {
+        public ClashTab() {
             InitializeComponent();
             dataGridView1.Enabled = false;
         }
@@ -23,11 +27,10 @@ namespace TeklaChecker {
             dataGridView1.DataSource = new List<ClashTableData>();
             dataGridView1.Update();
 
-            if (ClashChecker.ClashCheck((double) numericUpDownOverlap.Value)) {
+            if (ClashChecker.ClashCheck((double)numericUpDownOverlap.Value)) {
                 FillDataGrid(ClashChecker.ClashData);
                 dataGridView1.Enabled = true;
             }
-
         }
 
         private void FillDataGrid(List<ClashCheckData> ClashData) {
@@ -45,11 +48,10 @@ namespace TeklaChecker {
             dataGridView1.DataSource = tableDataObjects;
         }
 
-
         private void DataGridCellDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
             ModelObject mo1 = ClashChecker.ClashData[e.RowIndex].Object1;
             ModelObject mo2 = ClashChecker.ClashData[e.RowIndex].Object2;
-            var parts = new Part[] {mo1 as Part, mo2 as Part};
+            var parts = new Part[] { mo1 as Part, mo2 as Part };
 
             SelectionHelper selector = new SelectionHelper();
             selector.SelectParts(parts);
@@ -59,10 +61,6 @@ namespace TeklaChecker {
 
             viewer.RemoveDrawnCrashBoundingBox();
             viewer.DrawCrashBoundingBox(mo1.Identifier.ID, mo2.Identifier.ID);
-        }
-
-        private void CheckerForm_Load(object sender, EventArgs e) {
-
         }
     }
 
@@ -99,9 +97,7 @@ namespace TeklaChecker {
             Part1Name = part1Name;
             Part2Name = part2Name;
             ClashType = ClashTypeStrings[(int)cData.Type];
-            Overlap = cData.Overlap*1000;
+            Overlap = cData.Overlap * 1000;
         }
     }
-
 }
-

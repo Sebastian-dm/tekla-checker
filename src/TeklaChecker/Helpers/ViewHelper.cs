@@ -16,7 +16,7 @@ using Tekla.Structures.ModelInternal;
 
 
 
-namespace TeklaChecker {
+namespace TeklaChecker.Helpers {
     internal class ViewHelper {
 
         private static readonly ClashCheckHandler _ClashCheckHandler = new Model().GetClashCheckHandler();
