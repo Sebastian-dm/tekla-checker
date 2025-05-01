@@ -1,0 +1,8 @@
+{
+	"$schema": "https://example.com/project-schema.json",
+	"project": "xxxxxx",
+	"ClashCheckRules": {
+		"Void": {"*": {"type": "clash"}},
+		"*": {"*": {"type": "ignore"}}
+	}
+}

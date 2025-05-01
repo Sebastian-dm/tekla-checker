@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,15 +20,26 @@ namespace TeklaChecker.Tabs {
 
         public ClashTab() {
             InitializeComponent();
-            dataGridView1.Enabled = false;
+            ClashTab_Load();
+        }
+
+        private void ClashTab_Load() {
+            string relativePath = Path.Combine("Settings", "default.ccr");
+            string fullPath = Path.Combine(AppContext.BaseDirectory, relativePath);
+            if (File.Exists(fullPath))
+                textBoxFilePathClashSettings.Text = fullPath;
+            else
+                textBoxFilePathClashSettings.Text = "Default file not found!";
         }
 
         private void ButtonRunCheck_Click(object sender, EventArgs e) {
 
+            var clashRules = ClashChecker.LoadClashConfig(textBoxFilePathClashSettings.Text);
+
             dataGridView1.DataSource = new List<ClashTableData>();
             dataGridView1.Update();
 
-            if (ClashChecker.ClashCheck((double)numericUpDownOverlap.Value)) {
+            if (ClashChecker.ClashCheck(clashRules)) {
                 FillDataGrid(ClashChecker.ClashData);
                 dataGridView1.Enabled = true;
             }
@@ -61,6 +73,38 @@ namespace TeklaChecker.Tabs {
 
             viewer.RemoveDrawnCrashBoundingBox();
             viewer.DrawCrashBoundingBox(mo1.Identifier.ID, mo2.Identifier.ID);
+        }
+
+        private void label2_Click(object sender, EventArgs e) {
+
+        }
+
+        private void buttonBrowseClashSettings_Click(object sender, EventArgs e) {
+            // Set initial directory to the folder from the textbox, if valid
+            using (OpenFileDialog openFileDialog = new OpenFileDialog()) {
+                
+                string currentPath = textBoxFilePathClashSettings.Text;
+                if (!string.IsNullOrWhiteSpace(currentPath) && File.Exists(currentPath))
+                    openFileDialog.InitialDirectory = Path.GetDirectoryName(currentPath);
+                else if (!string.IsNullOrWhiteSpace(currentPath) && Directory.Exists(currentPath))
+                    openFileDialog.InitialDirectory = currentPath;
+                else
+                    openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+                openFileDialog.Filter = "Clash check rules (*.ccr)|*.ccr";
+                openFileDialog.FilterIndex = 1;
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK) {
+                    // Get the path of specified file
+                    string filePath = openFileDialog.FileName;
+                    textBoxFilePathClashSettings.Text = filePath;
+                }
+            }
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e) {
+
         }
     }
 

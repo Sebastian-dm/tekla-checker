@@ -22,6 +22,8 @@ namespace TeklaChecker {
             tabPageParts.Controls.Add(new PartsTab { Dock = DockStyle.Fill });
             tabPageClash.Controls.Add(new ClashTab { Dock = DockStyle.Fill });
             tabPageRebar.Controls.Add(new RebarTab { Dock = DockStyle.Fill });
+
+            tabControl.SelectedTab = tabPageClash;
         }
 
 

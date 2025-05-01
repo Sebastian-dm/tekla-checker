@@ -43,15 +43,14 @@ namespace TeklaChecker.Services {
 
         private HashSet<double> _overlap = new HashSet<double>();
 
-        private const string _jsonPath = "C:\\Users\\sdme\\git\\tekla-checker\\src\\Resources\\clash_rules.json";
-        private Dictionary<string, Dictionary<string, Dictionary<string, string>>> _clashConfig;
+        private Dictionary<string, Dictionary<string, Dictionary<string, string>>> _clashRules;
         #endregion
 
 
-        public bool ClashCheck(double minOverlap)
+        public bool ClashCheck(Dictionary<string, Dictionary<string, Dictionary<string, string>>> clashRules, double minOverlap = 2.00)
         {
             SettingMinOverlap = minOverlap;
-            _clashConfig = LoadClashConfig(_jsonPath);
+            _clashRules = clashRules;
 
             bool result = false;
             _selector = new ModelObjectSelector();
@@ -78,14 +77,15 @@ namespace TeklaChecker.Services {
             return result;
         }
 
-        private Dictionary<string, Dictionary<string, Dictionary<string, string>>> LoadClashConfig(string jsonPath) {
+        public Dictionary<string, Dictionary<string, Dictionary<string, string>>> LoadClashConfig(string jsonPath) {
             var result = new Dictionary<string, Dictionary<string, Dictionary<string, string>>>();
 
             string json = File.ReadAllText(jsonPath);
             var doc = JsonDocument.Parse(json);
             var root = doc.RootElement;
+            var rules = root.GetProperty("ClashCheckRules");
 
-            foreach (var firstLevel in root.EnumerateObject()) {
+            foreach (var firstLevel in rules.EnumerateObject()) {
                 string firstKey = firstLevel.Name;
                 result[firstKey] = new Dictionary<string, Dictionary<string, string>>();
 
@@ -132,12 +132,12 @@ namespace TeklaChecker.Services {
         private Dictionary<string, string> GetMatchingConfigLine(string part1Name, string part2Name, StringComparison comparisonType = StringComparison.Ordinal) {
             string[,] partNames = {{part1Name, part2Name},{part2Name, part1Name}};
             
-            foreach (string configPartName1 in _clashConfig.Keys) {
+            foreach (string configPartName1 in _clashRules.Keys) {
                 for (int i = 0; i < 2; i++) {
                     if (IsMatchingWildcardString(partNames[i, 0], pattern: configPartName1, comparisonType)) {
-                        foreach (string configPartName2 in _clashConfig[configPartName1].Keys) {
+                        foreach (string configPartName2 in _clashRules[configPartName1].Keys) {
                             if (IsMatchingWildcardString(partNames[i, 1], pattern: configPartName2, comparisonType)) {
-                                return _clashConfig[configPartName1][configPartName2];
+                                return _clashRules[configPartName1][configPartName2];
                             }
                         }
                     }
