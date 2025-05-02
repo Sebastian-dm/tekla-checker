@@ -36,12 +36,19 @@ namespace TeklaChecker.Tabs {
 
             var clashRules = ClashChecker.LoadClashConfig(textBoxFilePathClashSettings.Text);
 
+            lblNoData.Visible = false;
+            dataGridView1.Visible = true;
             dataGridView1.DataSource = new List<ClashTableData>();
             dataGridView1.Update();
 
             if (ClashChecker.ClashCheck(clashRules)) {
                 FillDataGrid(ClashChecker.ClashData);
                 dataGridView1.Enabled = true;
+                dataGridView1.Visible = true;
+
+                if (dataGridView1.Rows.Count <= 0) {
+                    lblNoData.Visible = true;
+                }
             }
         }
 

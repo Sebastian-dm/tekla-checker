@@ -128,10 +128,10 @@
       <DependentUpon>ClashTab.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
-    <Content Include="Settings\voids.ccr">
+    <Content Include="Settings\default.ccr">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Settings\default.ccr">
+    <Content Include="Settings\voids.ccr">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />

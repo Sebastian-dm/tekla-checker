@@ -37,6 +37,7 @@
             this.textBoxFilePathClashSettings = new System.Windows.Forms.TextBox();
             this.buttonBrowseClashSettings = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblNoData = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -74,7 +75,7 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(729, 567);
+            this.dataGridView1.Size = new System.Drawing.Size(729, 538);
             this.dataGridView1.TabIndex = 2;
             this.dataGridView1.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridCellDoubleClick);
             // 
@@ -165,10 +166,23 @@
             this.tableLayoutPanel1.TabIndex = 9;
             this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
             // 
+            // lblNoData
+            // 
+            this.lblNoData.AutoSize = true;
+            this.lblNoData.BackColor = System.Drawing.Color.Transparent;
+            this.lblNoData.Enabled = false;
+            this.lblNoData.Location = new System.Drawing.Point(15, 37);
+            this.lblNoData.Name = "lblNoData";
+            this.lblNoData.Size = new System.Drawing.Size(156, 13);
+            this.lblNoData.TabIndex = 10;
+            this.lblNoData.Text = "The check ran with no clashes.";
+            this.lblNoData.Visible = false;
+            // 
             // ClashTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lblNoData);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "ClashTab";
@@ -183,6 +197,7 @@
         }
 
         #endregion
-        
+
+        private System.Windows.Forms.Label lblNoData;
     }
 }

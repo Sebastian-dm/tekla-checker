@@ -51,24 +51,25 @@ namespace TeklaChecker.Services {
         {
             SettingMinOverlap = minOverlap;
             _clashRules = clashRules;
+            _clashData = new List<ClashCheckData>();
 
             bool result = false;
-            _selector = new ModelObjectSelector();
-            _clashData = new List<ClashCheckData>();
-            ArrayList objectsToSelect = new ArrayList();
+            //_selector = new ModelObjectSelector();
+            //ArrayList objectsToSelect = new ArrayList();
 
-            var mos = _model.GetModelObjectSelector();
-            var moe = mos.GetObjectsByFilterName("ClashCheck");
+            //var mos = _model.GetModelObjectSelector();
+            //var moe =  mos.GetSelectedObjects();
+            //var moe = mos.GetObjectsByFilterName("ClashCheck_A201");
 
-            while (moe.MoveNext()) {
-                ModelObject modelObject = moe.Current;
-                if (modelObject != null) {
-                    objectsToSelect.Add(modelObject);
-                }
-            }
+            //while (moe.MoveNext()) {
+            //    ModelObject modelObject = moe.Current;
+            //    if (modelObject != null) {
+            //        objectsToSelect.Add(modelObject);
+            //    }
+            //}
 
-            _selector.Select(objectsToSelect);
-            _model.CommitChanges();
+            //_selector.Select(objectsToSelect);
+            //_model.CommitChanges();
 
             RegisterEvents();
             result = RunClashCheck();
