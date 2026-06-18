@@ -1,0 +1,11 @@
+<Project>
+  <PropertyGroup>
+    <!-- Set this once to switch Tekla versions -->
+    <TeklaVersion>2024.0</TeklaVersion>
+
+    <!-- Adjust if your install path differs (e.g., 2024.1, custom drive, etc.) -->
+    <TeklaInstallRoot>$(ProgramFiles)\Tekla Structures\$(TeklaVersion)</TeklaInstallRoot>
+    <TeklaBin>$(TeklaInstallRoot)\bin</TeklaBin>
+    <TeklaPlugins>$(TeklaInstallRoot)\bin\plugins</TeklaPlugins>
+  </PropertyGroup>
+</Project>

@@ -23,10 +23,32 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            components = new System.ComponentModel.Container();
+            this.buttonRunRefCheck = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // buttonRunRefCheck
+            // 
+            this.buttonRunRefCheck.Location = new System.Drawing.Point(334, 256);
+            this.buttonRunRefCheck.Name = "buttonRunRefCheck";
+            this.buttonRunRefCheck.Size = new System.Drawing.Size(75, 23);
+            this.buttonRunRefCheck.TabIndex = 0;
+            this.buttonRunRefCheck.Text = "Run Ref Check";
+            this.buttonRunRefCheck.UseVisualStyleBackColor = true;
+            this.buttonRunRefCheck.Click += new System.EventHandler(this.buttonRunRefCheck_Click);
+            // 
+            // SettingsTab
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.buttonRunRefCheck);
+            this.Name = "SettingsTab";
+            this.Size = new System.Drawing.Size(753, 591);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Button buttonRunRefCheck;
     }
 }
